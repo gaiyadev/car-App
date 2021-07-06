@@ -21,15 +21,15 @@ return response()->json(['greeting' => "Hello world in JSON",
     'website' => "https://www.gaiyaobed.com.ng/",
     'github' => "https://github.com/gaiyadev",
     'location' => "Kaduna State",
-    'stack'=> "MERN, MEVN, MAVN, MARN, LAMP",
-    'technologies'=>
+    'stack' => "MERN, MEVN, MAVN, MARN, LAMP",
+    'technologies' =>
         "HTML, CSS, JavaScript, VueJs, NuxtJs, ReactJs, NextJs, PWA, Bulma, Bootstrap, Vuetify, Laravel, Lumen, AdonisJs, ExpressJs, KoaJs, MYSQL, MongoDb, PHP, TypeScript, Flutter, Dart, Restful API, GraphQL API",
-    'infrastructures'=> "Netlify, Vercel, Heroku, Digital Ocean",
+    'infrastructures' => "Netlify, Vercel, Heroku, Digital Ocean",
     'tools' => "npm, yarn",
 ],
-'U/UX'=>[
-    'name' => "Gaiya M. Obed",
-    'email' => "info@gaiyaobed.com.ng",
+'UI/UX'=>[
+    'name' => "",
+    'email' => "",
     'website' => "",
     'github' => "",
     'location' => "Kaduna State",
@@ -42,14 +42,16 @@ return response()->json(['greeting' => "Hello world in JSON",
 });
 
 
-// $router->group(['prefix' => 'api/v1'], function () use ($router) {
-//     $router->post("register", 'UserController@register');
-//     $router->post("login", 'UserController@login');
-//     $router->post("add", 'NewsController@store');
-//     $router->get("{id}", 'NewsController@show');
-//     $router->get("", 'NewsController@index');
-//     $router->put("{id}", 'NewsController@update');
-//     $router->delete("{id}", 'NewsController@destroy');
-//     $router->get("user/{id}", 'ProfileController@index');
-//    // $router->get("auth", 'ProfileController@userNews');
-// });
+$router->group(['prefix' => 'api/v1/users'], function () use ($router) {
+    $router->post("/signup", 'UserController@store');
+    $router->post("/signin", 'UserController@login');
+    $router->get("/user", 'ProfileController@currentLogin');
+    $router->put("/changePassword", 'ProfileController@changePassword');
+    $router->put("/updateDetails", 'ProfileController@updateDetails');
+    // $router->post("add", 'NewsController@store');
+    // $router->get("", 'NewsController@index');
+    // $router->put("{id}", 'NewsController@update');
+    // $router->delete("{id}", 'NewsController@destroy');
+    // $router->get("user/{id}", 'ProfileController@index');
+   // $router->get("auth", 'ProfileController@userNews');
+});
