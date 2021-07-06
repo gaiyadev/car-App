@@ -11,7 +11,6 @@ class ProfileController extends Controller
     {
         //  $this->middleware('auth', ['except' => ['index']]);
          $this->middleware('auth');
-
     }
 
     // Get current Login user
