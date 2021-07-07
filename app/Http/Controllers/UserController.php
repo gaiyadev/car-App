@@ -17,7 +17,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+         try{
+        $user = User::orderBy('created_at', 'desc')->paginate(10);
+            if($user){                
+                return response()->json(['user' => $user,]);
+            }
+        }
+        catch(\Exception $e){
+        return response()->json(['error' => 'Something went wrong!', 'status' => false], 409);
+        }
     }
 
     /**
@@ -54,7 +62,7 @@ class UserController extends Controller
             $user->save();
             return response()->json(['user' => $user, 'message' => 'Account created successfully', 'status' => true], 201);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Account Registration Failed!', 'status' => false], 409);
+            return response()->json(['error' => 'Account Registration Failed!', 'status' => false], 500);
         }
     }
 
@@ -66,7 +74,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-         $user = User::find($id);
+        $user = User::find($id);
         if(!$user)  return response()->json(['error' => 'Not record found!', 'status' => false], 404);
         return response()->json(['user' => $user, 'status' => true], 200);  
     }
@@ -100,9 +108,23 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
-    {
-        //
+    public function destroy($id)
+    {   
+        try{
+            $user = User::findOrFail($id);
+            $user->delete();
+            if($user){                
+                return response()->json(['user' => $user, 'message'=> 
+                'Account deleted successfully', 'status' => true], 200);  
+            } else {
+                 return response()->json(['message'=> 
+                'Not found', 'status' => true], 200);  
+            }
+        }
+        catch(\Exception $e){
+            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+
+        }
     }
     // Lign
         public function login(Request $request)

@@ -45,9 +45,11 @@ return response()->json(['greeting' => "Hello world in JSON",
 $router->group(['prefix' => 'api/v1/users'], function () use ($router) {
     $router->post("/signup", 'UserController@store');
     $router->post("/signin", 'UserController@login');
+    $router->delete("/{id}", 'UserController@destroy');
     $router->get("/user", 'ProfileController@currentLogin');
     $router->put("/changePassword", 'ProfileController@changePassword');
     $router->put("/updateDetails", 'ProfileController@updateDetails');
+    $router->get("/", 'UserController@index');
     // $router->post("add", 'NewsController@store');
     // $router->get("", 'NewsController@index');
     // $router->put("{id}", 'NewsController@update');

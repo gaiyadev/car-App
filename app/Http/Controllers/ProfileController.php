@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 class ProfileController extends Controller
 {
      public function __construct()
@@ -33,19 +34,19 @@ class ProfileController extends Controller
         $id = Auth::user()->id;
         $hashPassword = Auth::user()->password;
         if(!Hash::check($request->password, $hashPassword)) {
-            return response()->json(['error' => 'Current Password is invalid', 'status' => false], 409);
+            return response()->json(['error' => 'Current Password is invalid', 'status' => false], 400);
         }
         if(Hash::check($request->newPassword, $hashPassword)) {
-            return response()->json(['error' => 'Current Password cannot be the same with new password', 'status' => false], 409);
+            return response()->json(['error' => 'Current Password cannot be the same with new password', 'status' => false], 400);
         }
          try {
-            $user = User::find($id);
+            $user = User::findOrFail($id);
             $plainPassword = $request->input('newPassword');
             $user->password = app('hash')->make($plainPassword);
          $user->save();
             return response()->json(['user' => $user, 'message' => 'Password changed successfully', 'status' => true], 201);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong!', 'status' => false], 409);
+            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
         }
 
     }
@@ -66,7 +67,7 @@ class ProfileController extends Controller
             $user->save();
             return response()->json(['user' => $user, 'message' => 'Profile changed successfully', 'status' => true], 201);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Something went wrong!', 'status' => false], 409);
+            return response()->json(['message' => 'Something went wrong!', 'status' => false], 500);
     }
 }
 }
