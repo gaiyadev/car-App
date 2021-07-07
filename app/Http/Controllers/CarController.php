@@ -58,10 +58,10 @@ class CarController extends Controller
     {
          $this->validate($request, [
             'symptoms' => 'required|string|min:4|unique:cars',
-            'causes' => 'required|',
+            'causes' => 'required|string',
             'solution' => 'required|min:4',
-            'carType' => 'required|',
-            'yearOfManufacture' => 'required|',
+            'carType' => 'required|string',
+            'yearOfManufacture' => 'required|string',
             'type' => 'string|required',
         ]);
          $user = Auth::user()->id;
@@ -127,11 +127,11 @@ class CarController extends Controller
     {
             $this->validate($request, [
             'symptoms' => 'required|string|min:4|unique:cars',
-            'causes' => 'required|',
-            'solution' => 'required|min:4',
-            'carType' => 'required|',
-            'yearOfManufacture' => 'required|',
-            'type' => 'string',
+            'causes' => 'required|string',
+            'solution' => 'required|min:4|string',
+            'carType' => 'required|string',
+            'yearOfManufacture' => 'required|string',
+            'type' => 'string|required',
         ]);
          try {
             $car = Car::findOrFail($id);
