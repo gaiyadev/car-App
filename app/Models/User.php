@@ -53,4 +53,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return [];
     }
+
+       public function setNameAttribute($value)
+    {
+        $this->attributes['username'] = ucfirst($value);
+    }
+
+    //accessor
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
+    }
 }

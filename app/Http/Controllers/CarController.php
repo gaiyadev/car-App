@@ -36,9 +36,16 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function symptoms()
     {
-        //
+        try{
+        $car = Car::select('symptoms')->get();
+        return response()->json(['car' => $car,]);
+        }
+        catch(\Exception $e){
+        return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+        }
+
     }
 
     /**
@@ -94,12 +101,19 @@ class CarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id has Bug
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function showSymptoms($search)
     {
-        //
+     try{
+     // $car = Car::where('symptoms', Input::get('symptoms'))->orWhere('causes', 'like', '%' . Input::get('causes') . '%')->get();
+        //$car = Car::all();
+        return response()->json(['car' => $search,]);
+        }
+        catch(\Exception $e){
+        return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+        }
     }
 
     /**
