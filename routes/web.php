@@ -57,5 +57,5 @@ $router->group(['prefix' => 'api/v1/users'], function () use ($router) {
     $router->put("/car/{id}", 'CarController@update');
     $router->delete("/car/{id}", 'CarController@destroy');
     $router->get("/car/one", 'CarController@symptoms');
-  //  $router->get("/car/search/{search}", 'CarController@showSymptoms');
+   // $router->get("/car/search/{search}", 'CarController@showSymptoms');
 });

@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'username', 'email', 'password'
     ];
 
     /**
@@ -59,13 +59,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $this->attributes['username'] = ucfirst($value);
     }
 
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
     //accessor
     public function getNameAttribute($value)
     {
         return ucfirst($value);
     }
-    public function cars()
-    {
-        return $this->hasMany(Car::class);
-    }
+    // public function cars()
+    // {
+    //     return $this->hasMany(Car::class);
+    // }
 }

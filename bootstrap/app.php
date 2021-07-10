@@ -99,6 +99,9 @@ $app->routeMiddleware([
 
 // $app->register(App\Providers\EventServiceProvider::class);
 
+$app->middleware([
+    App\Http\Middleware\CorsMiddleware::class
+ ]);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

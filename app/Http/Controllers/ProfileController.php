@@ -19,7 +19,7 @@ class ProfileController extends Controller
         $auth = Auth::user()->id;
         $user = User::find($auth);
         if(!$user)  return response()->json(['message' => 'No record found!', 'status' => false], 404);
-        return response()->json(['news' => $user, 'status' => true], 200); 
+        return response()->json(['user' => $user, 'status' => true], 200); 
     }
 
     //   Change Password

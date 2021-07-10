@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -50,15 +50,14 @@ class UserController extends Controller
         $this->validate($request, [
             'username' => 'required|string|min:4|alpha',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|string|min:6',
         ]);
         
            try {
             $user = new User;
             $user->username = $request->input('username');
             $user->email = $request->input('email');
-            $plainPassword = $request->input('password');
-            $user->password = app('hash')->make($plainPassword);
+            $user->password = $request->input('password');
             $user->save();
             return response()->json(['user' => $user, 'message' => 'Account created successfully', 'status' => true], 201);
         } catch (\Exception $e) {
@@ -136,6 +135,7 @@ class UserController extends Controller
         ]);
 
         $credentials = $request->only(['email', 'password']);
+
         if (!$token = Auth::attempt($credentials)) {
             return response()->json(['error' => 'Username or Password is in valid'], 401);
         }
