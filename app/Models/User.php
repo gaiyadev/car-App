@@ -66,7 +66,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     //accessor
-    public function getNameAttribute($value)
+    public function getUsernameAttribute($value)
     {
         return ucfirst($value);
     }

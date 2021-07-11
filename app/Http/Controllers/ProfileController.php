@@ -41,8 +41,7 @@ class ProfileController extends Controller
         }
          try {
             $user = User::findOrFail($id);
-            $plainPassword = $request->input('newPassword');
-            $user->password = app('hash')->make($plainPassword);
+            $user->password = $request->input('newPassword');
          $user->save();
             return response()->json(['user' => $user, 'message' => 'Password changed successfully', 'status' => true], 201);
         } catch (\Exception $e) {
@@ -67,7 +66,7 @@ class ProfileController extends Controller
             $user->save();
             return response()->json(['user' => $user, 'message' => 'Profile changed successfully', 'status' => true], 201);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Something went wrong!', 'status' => false], 500);
+            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
     }
 }
 }
