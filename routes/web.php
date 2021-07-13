@@ -50,6 +50,8 @@ $router->group(['prefix' => 'api/v1/users'], function () use ($router) {
     $router->put("/changePassword", 'ProfileController@changePassword');
     $router->put("/updateDetails", 'ProfileController@updateDetails');
     $router->get("/", 'UserController@index');
+    $router->get("/count", 'UserController@countUsers');
+
     
 });
 
@@ -60,6 +62,5 @@ $router->group(['prefix' => 'api/v1/cars'], function () use ($router) {
     $router->get("/car/{id}", 'CarController@show');
     $router->put("/car/{id}", 'CarController@update');
     $router->delete("/del/{id}", 'CarController@destroy');
-    //  $router->get("/car/gg", 'CarController@symptoms');
-   // $router->get("/car/search/{search}", 'CarController@showSymptoms');
+    $router->get("/count", 'CarController@counCars');
 });

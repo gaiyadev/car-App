@@ -11,7 +11,7 @@ class CarController extends Controller
 {
      public function __construct()
     {
-         $this->middleware('auth', ['except' => ['index','show']]);
+         $this->middleware('auth', ['except' => ['index','show','counCars']]);
     }
     /**
      * Display a listing of the resource.
@@ -169,5 +169,18 @@ class CarController extends Controller
             return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
 
         }
+    }
+
+ public function counCars()
+ {
+     try{
+        $car = Car::all()->count();
+            if($car){                
+            return response()->json(['cars' => $car,]);
+         }
+        }
+        catch(\Exception $e){
+        return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+        } 
     }
 }

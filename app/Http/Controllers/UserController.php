@@ -146,4 +146,17 @@ class UserController extends Controller
         }
         return $this->respondWithToken($token);
     }
+
+     public function countUsers()
+        {
+        try{
+            $car = User::all()->count();
+                if($car){                
+                return response()->json(['users' => $car,]);
+            }
+            }
+            catch(\Exception $e){
+            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+            } 
+        }
 }
