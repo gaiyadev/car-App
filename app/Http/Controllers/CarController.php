@@ -126,7 +126,7 @@ class CarController extends Controller
     public function update(Request $request, $id)
     {
             $this->validate($request, [
-            'symptoms' => 'required|string|min:4|unique:cars',
+            'symptoms' => 'required|string|min:4',
             'causes' => 'required|string',
             'solution' => 'required|min:4|string',
             'carType' => 'required|string',
