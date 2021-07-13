@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    //  public function __construct()
+    // {
+    //      $this->middleware('auth', ['except' => ['index']]);
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +23,9 @@ class UserController extends Controller
     public function index()
     {
          try{
-        $user = User::orderBy('created_at', 'desc')->paginate(10);
+        $user = User::orderBy('created_at', 'desc')->paginate(100);
             if($user){                
-                return response()->json(['user' => $user,]);
+                return response()->json(['users' => $user,]);
             }
         }
         catch(\Exception $e){

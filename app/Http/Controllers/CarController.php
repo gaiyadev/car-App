@@ -11,7 +11,7 @@ class CarController extends Controller
 {
      public function __construct()
     {
-         $this->middleware('auth', ['except' => ['index']]);
+         $this->middleware('auth', ['except' => ['index','show']]);
     }
     /**
      * Display a listing of the resource.
@@ -91,7 +91,7 @@ class CarController extends Controller
     {
         try {
         $car = Car::findOrFail($id);
-        if($car) return response()->json(['car' => $car, 'status' => false], 404);
+        if($car) return response()->json(['car' => $car, 'status' => false], 200);
         }       
          catch(\Exception $e){
             return response()->json(['error' => 'Something went wrong', 'status' => true], 500);  
